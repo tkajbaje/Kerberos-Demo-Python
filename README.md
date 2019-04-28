@@ -3,7 +3,9 @@ This is a small guide on the workings of kerberos protocol.We will set up a kerb
 
 # What you will need.
 Ubuntu 18.04 or Later
+
 VMWare
+
 Python
 
 # VMs:
@@ -80,6 +82,7 @@ Install OpenSSH on ssh.com
 Edit /etc/ssh/sshd_config and enable the following lines
 
 >GSSAPIAuthentication yes
+
 >GSSAPICleanupCredentials yes
 
 Then restart the ssh server [/etc/init.d/ssh restart] 
@@ -87,7 +90,9 @@ Then restart the ssh server [/etc/init.d/ssh restart]
 # Kerberos Server(kerberos.com)
 
 >sudo kadmin.local
+
 >addprinc -randkey host/ssh.com
+
 >ktadd -k /tmp/ssh.com.keytab host/ssh.com
 
 >scp /tmp/ssh.com.keytab root@ssh.com:/etc/krb5.keytab
@@ -97,6 +102,7 @@ Then restart the ssh server [/etc/init.d/ssh restart]
 Edit /etc/ssh/ssh_config and enable the following lines
 
 >GSSAPIAuthentication yes
+
 >GSSAPIDelegateCredentials yes
 
 
